@@ -241,47 +241,42 @@ const App = () => {
 
   return <DeveloperCirclesTable 
     id='123-table-id'
-    style={{
-      border: '10px solid green'
-    }}
-    striped={true}
+    style={{}}
+    striped
+    bordered
     className='some-table'
-    title='Facebook Developer Circles'
+    title={{
+      id: '123-table-title-id',
+      style: {},
+      className: 'some-table-title',
+      value: 'Facebook Developer Circles'
+    }}
     search={{
       id: '123-search-id',
-      style: {
-        borderRight: '10px solid lightblue'
-      },
+      style: {},
       className: 'some-table-search',
-      placeholder: '...Searching!',
+      placeholder: 'Searching...!',
       name: 'search',
       value: search,
       type: 'text',
-      onChange: (e: any) => setSearch(e.target.value)
+      searchFields: ['name', 'email'],
+      onChangeSearch: (e: any) => setSearch(e.target.value)
     }}
     rows={users}
     columns={[
       {
         id: '123-some-table-name-id',
-        style: {
-          borderLeft: '10px solid red'
-        },
+        style: {},
         className: 'some-table-column',
         title: 'Full Name',
         value: (row: any) => row.name,
         columnKey: 'name',
-        onSortAsc: () => {
-          console.log('asc')
-        },
-        onSortDes: () => {
-          console.log('des')
-        }
+        onSortAsc: () => {},
+        onSortDes: () => {}
       },
       {
         id: '123-some-table-email-id',
-        style: {
-          borderLeft: '10px solid red'
-        },
+        style: {},
         className: 'some-table-column',
         title: 'Email Address',
         value: (row: any) => row.email,
@@ -289,6 +284,17 @@ const App = () => {
         sortButtons: true,
         onSortAsc: null,
         onSortDes: null
+      },
+      {
+        id: '123-some-table-address-id',
+        style: {},
+        className: 'some-table-column',
+        title: 'Address',
+        value: (row: any) => row.address.street,
+        columnKey: 'address',
+        sortButtons: true,
+        onSortAsc: () => {},
+        onSortDes: () => {}
       }
     ]}
   />

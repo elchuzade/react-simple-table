@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './styles.module.css'
 
 const TableColumnTitle = ({
   id,
@@ -11,14 +12,28 @@ const TableColumnTitle = ({
   return (
     <th
       id={id}
-      className={`table-column ${className}`} style={style}
+      className={`${styles['table-column']} ${className}`} style={style}
     >
-      <span className='table-column-title-left'>
+      <span className={styles['table-column-title-left']}>
         {title}
       </span>
-      <span className='table-column-title-right'>
-        {onSortAsc && <button onClick={onSortAsc}>Asc</button>}
-        {onSortDes && <button onClick={onSortDes}>Des</button>}
+      <span className={styles['table-column-title-right']}>
+        {onSortAsc &&
+          <button
+            className={styles['table-column-title-button']}
+            onClick={onSortAsc}
+          >
+              {'<'}
+          </button>
+        }
+        {onSortDes &&
+          <button
+            className={styles['table-column-title-button']}
+            onClick={onSortDes}
+          >
+            {'>'}
+          </button>
+        }
       </span>
     </th>
   )

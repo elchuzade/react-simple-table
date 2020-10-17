@@ -4,9 +4,10 @@ interface TableProps {
   className?: string; 
   title?: TableTitle;
   columns: TableColumn[];
-  rows: any[];
+  rows: object[];
   search?: TableInput;
   striped?: boolean;
+  bordered?: boolean
 }
 
 interface TableColumnTitle {
@@ -45,11 +46,23 @@ type TableInput = {
   type?: string;
   value?: any;
   searchFields?: string[];
-  onChange?: OnChangeInput;
+  onChangeSearch?: OnChangeInput;
 }
 
-type OnChangeInput = (e: any) => any
+type SortData = (
+  column: TableColumn,
+  rows: object[],
+  sortDirection: number
+) => void
 
-type OnSortButton = (e: any) => any
+type FilterData = (
+  searchFields: string[],
+  rows: object[],
+  searchTerm: string
+) => void
 
-type ColumnValue = (row: any) => any
+type OnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => any
+
+type OnSortButton = () => any
+
+type ColumnValue = (row: object) => string

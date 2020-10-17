@@ -1,6 +1,7 @@
 import * as React from 'react'
 import TableColumnTitle from './TableColumnTitle'
 import './styles.module.css'
+import styles from './styles.module.css'
 
 export const DeveloperCirclesTable = ({
   id,
@@ -10,56 +11,93 @@ export const DeveloperCirclesTable = ({
   columns,
   rows,
   search,
-  striped
+  striped,
+  bordered
 }: TableProps) => {
-  // const [tableRows, setTableRows] = React.useState(rows)
+  const [tableRows, setTableRows] = React.useState(rows)
 
-  const tableRows = rows
+  const sortData: SortData = (column, rows, sortDirection) => {
+    setTableRows([...rows.sort((a, b) =>
+      column.value(a) > column.value(b) ? sortDirection : -sortDirection)])
+  }
+
+  const filterData: FilterData = (searchFields, rows, searchTerm) => {
+    var filteredData: object[] = []
+    searchFields.forEach(field => {
+      var column = columns.find(col => col.columnKey === field)
+      var filteredDataField = rows.filter(row => column && column.value(row).toLowerCase().includes(searchTerm.toLowerCase()))
+
+      filteredData = filteredData.concat(filteredDataField.filter(item => filteredData.indexOf(item) < 0))
+      setTableRows(filteredData)
+    })
+  }
 
   return (
-    <div id={id} className={`table ${className || ''}`} style={style}>
-      <div className='table-header'>
-        <div className='table-haeder-left'>
-          {title}
+    <div
+      id={id}
+      className={`${styles.table} ${className || ''}`}
+      style={style}
+    >
+      <div className={styles['table-header']}>
+        <div className={styles['table-header-left']}>
+          {title && <p className={`${styles['table-header-title']} ${title.className || ''}`} style={title.style}>{title.value}</p>}
         </div>
-        <div className='table-header-right'>
+        <div className={styles['table-header-right']}>
           {search && (
             <input
               id={search.id}
-              className={`table-header-input ${search.className || ''}`}
+              className={`${styles['table-header-input']} ${search.className || ''}`}
               style={search.style}
               type={search.type || 'text'}
               placeholder={search.placeholder || 'search'}
               name={search.name}
               value={search.value}
-              onChange={search.onChange}
+              onChange={e => {
+                search.searchFields && filterData(search.searchFields, rows, e.target.value)
+                search.onChangeSearch && search.onChangeSearch(e)
+                return
+              }}
             />
           )}
         </div>
       </div>
-      <div className='table-body'>
+      <div className={styles['table-body']}>
         <table>
           <thead>
             <tr>
-              {columns.map(col => (
+              {columns.map(column => (
                 <TableColumnTitle
-                  id={col.id}
-                  key={col.columnKey}
-                  style={col.style}
-                  className={col.className}
-                  title={col.title}
-                  onSortAsc={col.onSortAsc}
-                  onSortDes={col.onSortDes}
+                  id={column.id}
+                  key={column.columnKey}
+                  style={column.style}
+                  className={column.className}
+                  title={column.title}
+                  onSortAsc={column.onSortAsc ? () => {
+                    sortData(column, rows, 1)
+                    return column.onSortAsc
+                  } : undefined}
+                  onSortDes={column.onSortDes ? () => {
+                     sortData(column, rows, -1)
+                    return column.onSortDes
+                  } : undefined}
                 />
               ))}
             </tr>
           </thead>
           <tbody>
             {tableRows.map((row, index) => (
-              <tr key={index} className={`table-row ${striped && 'striped'}`}>
-                {columns.map((col, i) => (
-                  <td key={i} className='table-row-item'>
-                    {typeof col.value(row) === 'string' ? col.value(row) : `Unsupported format, please check "value" field of ${col.columnKey} column`}
+              <tr key={index}>
+                {columns.map((column, i) => (
+                  <td
+                    key={i}
+                    className={styles['table-item']}
+                    style={{
+                      background: striped ? 'none' : 'white',
+                      border: bordered ? '1px solid lightgrey' : 'none',
+                      ...column.style
+                    }}
+                  >
+                    {typeof column.value(row) === 'string' ? column.value(row) : `Unsupported format, please check "value" field of ${column.columnKey} column`}
                   </td>
                 ))}
               </tr>
