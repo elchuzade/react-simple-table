@@ -1,10 +1,10 @@
 {
-  "name": "simple-table",
+  "name": "react-simple-table-devc",
   "version": "1.0.0",
   "description": "A simple table with sort and filteer functions",
   "author": "elchuzade",
   "license": "MIT",
-  "repository": "elchuzade/react-simple-table",
+  "repository": "elchuzade/react-simple-table-devc",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",

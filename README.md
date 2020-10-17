@@ -1,13 +1,13 @@
-# simple-table
+# react-simple-table-devc
 
 > A simple table with sort and filteer functions
 
-[![NPM](https://img.shields.io/npm/v/simple-table.svg)](https://www.npmjs.com/package/simple-table) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-simple-table-devc.svg)](https://www.npmjs.com/package/react-simple-table-devc) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save simple-table
+npm install --save react-simple-table-devc
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install --save simple-table
 ```tsx
 import React, { Component } from 'react'
 
-import MyComponent from 'simple-table'
-import 'simple-table/dist/index.css'
+import MyComponent from 'react-simple-table-devc'
+import 'react-simple-table-devc/dist/index.css'
 
 class Example extends Component {
   render() {

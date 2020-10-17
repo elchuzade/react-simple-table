@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { DeveloperCirclesTable } from 'simple-table'
-import 'simple-table/dist/index.css'
+import { DeveloperCirclesTable } from 'react-simple-table-devc'
+import 'react-simple-table-devc/dist/index.css'
 
 const users = [
   {
