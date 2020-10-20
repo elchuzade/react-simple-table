@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { DeveloperCirclesTable } from 'react-simple-table-devc'
 import 'react-simple-table-devc/dist/index.css'
@@ -237,7 +237,7 @@ const users = [
 ]
 
 const App = () => {
-  const [search, setSearch] = React.useState('')
+  const [search, setSearch] = useState('')
 
   return <DeveloperCirclesTable 
     id='123-table-id'

@@ -31,7 +31,7 @@ type TableColumn = {
   style?: {};
   className?: string;
   title?: string;
-  columnKey: string;
+  columnKey: string; // unique
   onSortAsc?: OnSortButton;
   onSortDes?: OnSortButton;
   value: ColumnValue;

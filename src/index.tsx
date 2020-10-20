@@ -1,9 +1,8 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import TableColumnTitle from './TableColumnTitle'
-import './styles.module.css'
 import styles from './styles.module.css'
 
-export const DeveloperCirclesTable = ({
+const DeveloperCirclesTable = ({
   id,
   style,
   className,
@@ -14,7 +13,7 @@ export const DeveloperCirclesTable = ({
   striped,
   bordered
 }: TableProps) => {
-  const [tableRows, setTableRows] = React.useState(rows)
+  const [tableRows, setTableRows] = useState(rows)
 
   const sortData: SortData = (column, rows, sortDirection) => {
     setTableRows([...rows.sort((a, b) =>
@@ -108,3 +107,5 @@ export const DeveloperCirclesTable = ({
     </div>
   )
 }
+
+export default DeveloperCirclesTable
