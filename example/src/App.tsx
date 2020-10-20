@@ -281,7 +281,6 @@ const App = () => {
         title: 'Email Address',
         value: (row: any) => row.email,
         columnKey: 'email',
-        sortButtons: true,
         onSortAsc: null,
         onSortDes: null
       },
@@ -292,7 +291,6 @@ const App = () => {
         title: 'Address',
         value: (row: any) => row.address.street,
         columnKey: 'address',
-        sortButtons: true,
         onSortAsc: () => {},
         onSortDes: () => {}
       }
